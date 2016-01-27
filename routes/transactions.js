@@ -17,8 +17,11 @@ router.get('/', function(req, res, next) {
 router.post('/', function(req, res, next) {
   // Create new item 
   var item = new Item(req.body);
+  console.log('inside transactions.js, item created by MongDB model item.js', item);
+
   // Write to MongoDB and send back to main.js
   item.save(function(err, savedItem){
+  	console.log('inside item.save in transactions.js. savedItem is:', savedItem);
   	res.send(savedItem);
   }); 
 });

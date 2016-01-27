@@ -1,0 +1,14 @@
+extends layout
+
+block content
+ h3 Poster Item Details
+ h4 Name: #{name}  
+ h4 Description: #{description}
+ h4 Price: $#{price}
+ h4 Quantity: #{quantity}
+ <br>
+ a(href='/') Back
+ <br>
+ <br>
+ img(src='#{image}')
+ 
