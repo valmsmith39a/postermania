@@ -12,12 +12,25 @@ a {
 	text-align: center;
 }
 
+.price-title, .name-title {
+	cursor:pointer;
+	/*background-color: #A9A9A9;*/
+	border: solid 1px black; 
+}
+
 .image-col, .image-title {
 	position:relative;
 	text-align: left;
 }
 
+img {
+	max-width: 500px;
+  max-height: 500px;
+}
+
 .row-total-price {
 	position:absolute;
 	right: 17%;
+	border: solid 1px black; 
 }
+

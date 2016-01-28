@@ -2,16 +2,17 @@ extends layout
 
 block content
   h3 Create Poster Item 
-  <br> 
-  input#input-name(type='text', placeholder='Name of poster')
-  <br>
-  input#input-description(type='text', placeholder='Description')
-  <br>
-  input#input-image(type='text', placeholder='Weblink to image')
-  <br>
-  input#input-price(type='text', placeholder='Price')
-  <br>
-  input#input-quantity(type='text', placeholder='Quantity')
-  <br>
-  input#create-item-btn(type='submit', value='Create')
+  form#create-item-form
+    <br> 
+    input#input-name(type='text', placeholder='Name of poster' required)
+    <br>
+    input#input-description(type='text', placeholder='Description' required)
+    <br>
+    input#input-image(type='text', placeholder='Weblink to image' required)
+    <br>
+    input#input-price(type='text', placeholder='Price' required)
+    <br>
+    input#input-quantity(type='text', placeholder='Quantity' required)
+    <br>
+    input#create-item-btn(type='submit', value='Create' required)
   script(src='javascripts/createItem.js')

@@ -2,7 +2,7 @@ $(document).ready(init);
 
 function init(){
 	console.log('inside init of createItem.js');	
-	$('#create-item-btn').on('click', createItemBtn);
+	$('#create-item-form').on('submit', createItemBtn);
 }
 
 function createItemBtn(){
