@@ -5,37 +5,24 @@ var arrayOfRowContainersObjectsG = [];
 var priceTotalG = 0; 
 
 function init(){
-	console.log('inside init of main.js');
 	$('.items-list').on('click', '.name-col', displayItemDetails);
 	$('.items-list').on('click', '.price-col', displayItemDetails); 
+	$('.items-list').on('click', '.image-col', displayItemDetails); 
+
 	$('.items-list').on('click', '.delete-col', deleteItem);  
 	$('.items-list').on('click', '.edit-col', editItem);   
  
 	getItems();
 }
 
-/* Get items to buy */
 function getItems(){
 	// AJAX call to app.js, to router file transactions.js, which accesses MongoDB
-	$.get('/transactions', function(data) {
+	$.get('/transactions', function(data){
 			arrayOfItemsObjectsG = data; 
 			calculatePriceTotal(); 
 			updateArrayOfRowContainers();
 			displayRowContainers(); 
    });
-}
-
-/* Create item to buy */
-function createItem(){
-	console.log('inside createItem() in main.js');
-	// GET AJAX call to index.js router file to display create item page
-	$.get('/createItem', function(data) {
-
-  });
-
-	// In createItem.js, create item button makes POST AJAX call to transactions.js router file
-	// to add item created to MongoDB, returns page to main page 
-	// Update main.js with get call to items added to buy   
 }
 
 function deleteItem(){
@@ -47,51 +34,30 @@ function deleteItem(){
  		url: "/transactions/" + itemId
 		})
 		.done(function(status){
+			arrayOfItemsObjectsG.splice(indexOfItem,1);
+			calculatePriceTotal();
 			updateArrayOfRowContainers();
 			displayRowContainers();
  		});
 }
 
 function editItem(){
-	debugger;
-	console.log('inside editItem() in main.js');
 	var indexOfItem = $(this).closest('.row-container').index() - 1;
 	var itemObject = arrayOfItemsObjectsG[indexOfItem]; 
 	var itemId = itemObject._id;
 
 	location.href = '/editItem/' + itemId;
-  /*
-	$.ajax({
-  	method: "GET",
- 		url: '/editItem/' + itemId,
- 		data: itemObject
-		})
-		.done(function(data, err) {
-			debugger;
-			//updateArrayOfRowContainers();
-			//displayRowContainers();
- 		});
- 		*/
 }
 
 function displayItemDetails(){
 	var indexOfItem = $(this).closest('.row-container').index() - 1;
 	var itemId = arrayOfItemsObjectsG[indexOfItem]._id;
-	//Change this to GET
 	location.href = '/itemDetails/' + itemId;
-	//location.href = '/itemDetails'+itemId;
-}
-
-/* Get items added to cart. May implement as extra feature in future */
-function getItemsAddedToCart(){
-}
-
-/* Add item to cart. May implement as extra feature in future */
-function addItemToCart(){
 }
 
 function calculatePriceTotal(){
 	console.log('in calculate price total');
+	priceTotalG = 0; 
 	arrayOfItemsObjectsG.map(function(itemObject, index){
 		return priceTotalG += itemObject.price*itemObject.quantity; 
 	});
@@ -137,7 +103,5 @@ function updateArrayOfRowContainers(){
 }
 
 function displayRowContainers(){
-	//$('.itemsInStore-list').append('<div>test</div>');
 	$('.items-list').append(arrayOfRowContainersObjectsG);
-	//$('#items-input').val('');
 }

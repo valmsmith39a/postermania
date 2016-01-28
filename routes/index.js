@@ -5,7 +5,6 @@ var router = express.Router();
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  // Use Jade to create html 
   res.render('index');
   /* Read html from directory 
   console.log('inside get index.html');
@@ -18,8 +17,6 @@ router.get('/', function(req, res, next) {
 
 /* GET route to handle request for html page to create item */
 router.get('/createItem', function(req, res, next) {
-	console.log('inside INDEX.JS, in GET route, REQUEST HTML to CREATE ITEM');
-	/* html page to create item */
 	res.render('createItem');
 });
 
