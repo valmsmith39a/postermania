@@ -16,37 +16,34 @@ router.get('/', function(req, res, next) {
 	*/
 });
 
-/* GET item for details page */
-router.get('/itemDetails:itemId', function(req, res, next) {
-  // Obtain the id of the object to display details
-  // Get the object to display 
-  Item.findById(req.params.itemId, function(err, item){
-		if(err) res.status(400).send(err);
-	  res.render('displayItemDetails', {name:item.name, description:item.description, image:item.image, price:item.price, quantity:item.quantity});
-  });
-});
-
-/* Display item details page */
-/*
-router.get('/itemDetails:itemId', function(req, res, next) {
-	var itemId = req.params.itemId;
-  fs.readFile('./contacts.json', function(err, data){
-		// Parse JSON String into an object
-		if(data == ''){
-    	data = '[]';
-    }
-    var arrObj = JSON.parse(data);
-    var objToDisplay = arrObj[index];
-    res.render('contactDetails', {name:objToDisplay.name, phoneNumber:objToDisplay.phoneNumber, email:objToDisplay.email, address:objToDisplay.address, birthdate:objToDisplay.birthdate});
-	});
-});
-*/
-
 /* GET route to handle request for html page to create item */
 router.get('/createItem', function(req, res, next) {
 	console.log('inside INDEX.JS, in GET route, REQUEST HTML to CREATE ITEM');
 	/* html page to create item */
 	res.render('createItem');
+});
+
+/* GET item to edit page */
+router.get('/editItem/:itemId', function(req, res, next) {
+  // Obtain the id of the object to display details
+  // Get the object to display 
+  console.log('inside editItem route in index.js items id', req.params.itemId);
+  Item.findById(req.params.itemId, function(err, item){
+		if(err) res.status(400).send(err);
+		console.log('inside edit item', item);
+	  res.render('editItem', {itemId:item._id, name:item.name, description:item.description, image:item.image, price:item.price, quantity:item.quantity});
+  });
+});
+
+/* GET item for details page */
+router.get('/itemDetails/:itemId', function(req, res, next) {
+  // Obtain the id of the object to display details
+  // Get the object to display 
+  console.log('items id', req.params.itemId);
+  Item.findById(req.params.itemId, function(err, item){
+		if(err) res.status(400).send(err);
+	  res.render('displayItemDetails', {name:item.name, description:item.description, image:item.image, price:item.price, quantity:item.quantity});
+  });
 });
 
 module.exports = router;

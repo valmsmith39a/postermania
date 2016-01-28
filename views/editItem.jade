@@ -1,0 +1,34 @@
+extends layout
+
+block content
+ h3 Edit Poster Item Details
+ h4 Name: 
+ input#name(type='text', value='#{name}')
+ h4 Description: 
+ input#description(type='text', value='#{description}')
+ h4 Price: 
+ input#price(type='text', value='#{price}')
+ h4 Quantity: 
+ input#quantity(type='text', value='#{quantity}')
+ <br>
+ <br>
+ button.btn.btn-primary.save-button(type='button') Save Edits
+ <br>
+ <br>
+ a(href='/') Back
+ <br>
+ <br>
+ img#image(src='#{image}')
+ #itemId(data-itemid='#{itemId}')
+ script(src='../javascripts/editItem.js')
+
+
+
+
+
+
+
+
+
+ 
+

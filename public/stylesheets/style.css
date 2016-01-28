@@ -6,3 +6,18 @@ body {
 a {
   color: #00B7FF;
 }
+
+.quantity-col, .quantity-title {
+	position:relative;
+	text-align: center;
+}
+
+.image-col, .image-title {
+	position:relative;
+	text-align: left;
+}
+
+.row-total-price {
+	position:absolute;
+	right: 17%;
+}

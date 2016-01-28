@@ -30,6 +30,7 @@ router.post('/', function(req, res, next) {
 router.delete('/:itemId', function(req, res, next) {
   // Obtain the id of the object to delete 
   // Get the object to delete, and delete item from MongoDB
+  console.log('inside delete route in transactions. id is: ', req.params.itemId);
   Item.findById(req.params.itemId, function(err, item){
   	item.remove(function(err){
   		if(!err) console.log('item removed successfully');
@@ -46,12 +47,16 @@ router.put('/:itemId', function(req, res, next) {
   // Retrieve the object using the id of the item, req.params.itemId
   Item.findById(req.params.itemId, function(err, item){
   	// Update the object based on new info passed in 
+
+  	console.log('original item is: ', item); 
+
   	item.name = updatedItemObject.name;
   	item.price = updatedItemObject.price;
-  	item.description = updtedItemObject.description; 
+  	item.description = updatedItemObject.description; 
   	item.quantity = updatedItemObject.quantity;
   	// Write item back to MongoDB
   	item.save(function(err, savedItem){
+  		console.log('saved item is: ', savedItem);
   		res.status(err ? 400:200).send(err||savedItem);
   	});
   });
