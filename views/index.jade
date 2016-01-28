@@ -1,9 +1,12 @@
 extends layout
 
 block content
- h1 PosterMania
+ h1 MoviePostersMania
  h4 Classic movie posters galore.
  a(href='/createItem') Create poster item to buy
+ <br>
+ <br>
+ textarea#input-text(rows='1', cols='17', onkeyup='searchByName()', placeholder='Search by movie name', value='')
  <br>
  <br>
  table.table-striped.table-hover

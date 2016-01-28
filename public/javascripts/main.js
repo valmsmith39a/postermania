@@ -7,6 +7,7 @@ var priceTotalG = 0;
 
 var arrayOfItemsObjectsSortedByNameG = [];
 var arrayOfItemsObjectsSortedByPriceG = [];
+var filteredArrayOfItemsG = [];
 var sortedByNameFlagG = false; 
 var sortedByPriceFlagG = false; 
 
@@ -20,6 +21,8 @@ function init(){
 
 	$('.items-list').on('click', '.name-title', sortByName); 
 	$('.items-list').on('click', '.price-title', sortByPrice); 
+
+	$( "#input-text" ).on('keyup', searchByName);
 
 	getItems();
 }
@@ -75,12 +78,12 @@ function calculatePriceTotal(){
 
 function sortByName(){
 	if(sortedByNameFlagG === false){
-		// .slice() creates a copy of the original array, so it does not change during sort
 		arrayOfItemsObjectsG = arrayOfItemsObjectsG.sort(function(object1, object2){
 			return object1.name.localeCompare(object2.name);
 		});
 		sortedByNameFlagG = true;
   } else {
+  	// .slice() creates a copy of the original array, so it does not change during sort
   	arrayOfItemsObjectsG = originalArrayOfItemsObjectsG.slice();
   	sortedByNameFlagG = false;
   }
@@ -91,14 +94,13 @@ function sortByName(){
 }
 
 function sortByPrice(){
-	debugger;
 	if(sortedByPriceFlagG === false){
-		// .slice() creates a copy of the original array, so it does not change during sort
 		arrayOfItemsObjectsG = arrayOfItemsObjectsG.sort(function(object1, object2){
 			return parseFloat(object1.price) - parseFloat(object2.price);
 		});
 		sortedByPriceFlagG = true;
   } else {
+    // .slice() creates a copy of the original array, so it does not change during sort
   	arrayOfItemsObjectsG = originalArrayOfItemsObjectsG.slice();
   	sortedByPriceFlagG = false;
   }
@@ -106,6 +108,21 @@ function sortByPrice(){
 	calculatePriceTotal();
 	updateArrayOfRowContainers();
 	displayRowContainers();
+}
+
+function searchByName(){
+	var text = $('#input-text').val();
+	var regex = new RegExp(text, 'gi');
+	
+	arrayOfItemsObjectsG = originalArrayOfItemsObjectsG.slice();
+	arrayOfItemsObjectsG = arrayOfItemsObjectsG.filter(function(object){
+			if(object.name.match(regex) !== null){
+				return object;
+			}
+	});
+  calculatePriceTotal();
+  updateArrayOfRowContainers();
+  displayRowContainers();
 }
 
 function updateArrayOfRowContainers(){
