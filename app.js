@@ -6,10 +6,15 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
 
+
+var mongoose = require('mongoose').connect(process.env.MONGOLAB_URI ||'mongodb://localhost/buyitems'); 
+
+/*
 mongoose.connect('mongodb://localhost/buyitems', function(err){
   if(err) return console.log('mongo err:', err);
   console.log('Connected to MongoDB');
 });
+*/
 
 var app = express();
 
