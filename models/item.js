@@ -11,7 +11,6 @@ var itemSchema = new mongoose.Schema({
 });
 
 var Item = mongoose.model('Items', itemSchema);
-console.log('in item.js MongoDB item model', Item);
 
 module.exports = Item; 
 
