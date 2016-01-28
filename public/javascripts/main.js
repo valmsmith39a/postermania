@@ -161,8 +161,10 @@ function updateArrayOfRowContainers(){
 		$rowContainer.append($priceColumn);	
 		var $quantityColumn = $('<td>').addClass('quantity-col col-md-3 col-xs-3').text(item.quantity);
 		$rowContainer.append($quantityColumn);	
-		var $deleteColumn = $('<td>').addClass('delete-col col-md-3 col-xs-3').text('Delete');
-		$rowContainer.append($deleteColumn);	
+		var $deleteColumn = $('<td>').addClass('delete-col col-md-3 col-xs-3');
+		var $deleteIcon = $('<i>').addClass('fa fa-trash');
+    $deleteColumn.append($deleteIcon);
+    $rowContainer.append($deleteColumn);
 		var $editColumn = $('<td>').addClass('edit-col col-md-3 col-xs-3').text('Edit');
 		$rowContainer.append($editColumn);				
     arrayOfRowContainersObjectsG.push($rowContainer);

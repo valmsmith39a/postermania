@@ -6,13 +6,6 @@ var router = express.Router();
 /* GET home page. */
 router.get('/', function(req, res, next) {
   res.render('index');
-  /* Read html from directory 
-  console.log('inside get index.html');
-  fs.readFile('./views/index.html', function(err, data){
-		var html = fs.readFileSync('./views/index.html').toString();
-		res.send(html);
-	});
-	*/
 });
 
 /* GET route to handle request for html page to create item */
