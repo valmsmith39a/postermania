@@ -4,7 +4,9 @@ function init(){
 	$('#create-item-form').on('submit', createItemBtn);
 }
 
-function createItemBtn(){
+function createItemBtn(e){
+	e.preventDefault();
+	console.log('create item button')
 	var name = $('#input-name').val();
 	var description = $('#input-description').val();
 	var image = $('#input-image').val();
@@ -21,8 +23,10 @@ function createItemBtn(){
 
   $.post('/transactions', itemObject)
 	.success(function(data) {
+		console.log('data:', data)
 		location.href = '/';
   }).fail(function(err) {
+		console.log('err:', err)
     alert('something went wrong :(')
   });	
 }
