@@ -113,7 +113,7 @@ function sortByPrice(){
 function searchByName(){
 	var text = $('#input-text').val();
 	var regex = new RegExp(text, 'gi');
-	
+
 	arrayOfItemsObjectsG = originalArrayOfItemsObjectsG.slice();
 	arrayOfItemsObjectsG = arrayOfItemsObjectsG.filter(function(object){
 			if(object.name.match(regex) !== null){
@@ -149,8 +149,15 @@ function updateArrayOfRowContainers(){
 		var $itemColumn = $('<td>').addClass('name-col col-md-3 col-xs-3').text(item.name); 
     $rowContainer.append($itemColumn); 
     var $imageColumn = $('<img>').addClass('image-col col-md-3 col-xs-3').attr('src', item.image);
-		$rowContainer.append($imageColumn);	
-    var $priceColumn = $('<td>').addClass('price-col col-md-3 col-xs-3').text('$' + item.price);
+		$rowContainer.append($imageColumn);
+
+    var priceStr = String(item.price); 
+
+		if(priceStr.indexOf('.') === -1){
+			priceStr = priceStr + '.00'
+		}
+
+    var $priceColumn = $('<td>').addClass('price-col col-md-3 col-xs-3').text('$' + priceStr);
 		$rowContainer.append($priceColumn);	
 		var $quantityColumn = $('<td>').addClass('quantity-col col-md-3 col-xs-3').text(item.quantity);
 		$rowContainer.append($quantityColumn);	

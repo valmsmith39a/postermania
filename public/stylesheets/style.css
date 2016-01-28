@@ -14,8 +14,8 @@ a {
 
 .price-title, .name-title {
 	cursor:pointer;
-	/*background-color: #A9A9A9;*/
-	border: solid 1px black; 
+	background-color: #D3D3D3;
+	/*border: solid 1px black; */
 }
 
 .image-col, .image-title {
