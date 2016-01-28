@@ -2,7 +2,13 @@ $(document).ready(init);
 
 var arrayOfItemsObjectsG = [];
 var arrayOfRowContainersObjectsG = [];
+var originalArrayOfItemsObjectsG = [];
 var priceTotalG = 0; 
+
+var arrayOfItemsObjectsSortedByNameG = [];
+var arrayOfItemsObjectsSortedByPriceG = [];
+var sortedByNameFlagG = false; 
+var sortedByPriceFlagG = false; 
 
 function init(){
 	$('.items-list').on('click', '.name-col', displayItemDetails);
@@ -10,15 +16,20 @@ function init(){
 	$('.items-list').on('click', '.image-col', displayItemDetails); 
 
 	$('.items-list').on('click', '.delete-col', deleteItem);  
-	$('.items-list').on('click', '.edit-col', editItem);   
- 
+	$('.items-list').on('click', '.edit-col', editItem);  
+
+	$('.items-list').on('click', '.name-title', sortByName); 
+	$('.items-list').on('click', '.price-title', sortByPrice); 
+
 	getItems();
 }
 
 function getItems(){
 	// AJAX call to app.js, to router file transactions.js, which accesses MongoDB
 	$.get('/transactions', function(data){
-			arrayOfItemsObjectsG = data; 
+			arrayOfItemsObjectsG = data.slice();  
+			// Keep a copy of original array for sorting 
+			originalArrayOfItemsObjectsG = data.slice();
 			calculatePriceTotal(); 
 			updateArrayOfRowContainers();
 			displayRowContainers(); 
@@ -56,11 +67,45 @@ function displayItemDetails(){
 }
 
 function calculatePriceTotal(){
-	console.log('in calculate price total');
 	priceTotalG = 0; 
 	arrayOfItemsObjectsG.map(function(itemObject, index){
 		return priceTotalG += itemObject.price*itemObject.quantity; 
 	});
+}
+
+function sortByName(){
+	if(sortedByNameFlagG === false){
+		// .slice() creates a copy of the original array, so it does not change during sort
+		arrayOfItemsObjectsG = arrayOfItemsObjectsG.sort(function(object1, object2){
+			return object1.name.localeCompare(object2.name);
+		});
+		sortedByNameFlagG = true;
+  } else {
+  	arrayOfItemsObjectsG = originalArrayOfItemsObjectsG.slice();
+  	sortedByNameFlagG = false;
+  }
+
+	calculatePriceTotal();
+	updateArrayOfRowContainers();
+	displayRowContainers();
+}
+
+function sortByPrice(){
+	debugger;
+	if(sortedByPriceFlagG === false){
+		// .slice() creates a copy of the original array, so it does not change during sort
+		arrayOfItemsObjectsG = arrayOfItemsObjectsG.sort(function(object1, object2){
+			return parseFloat(object1.price) - parseFloat(object2.price);
+		});
+		sortedByPriceFlagG = true;
+  } else {
+  	arrayOfItemsObjectsG = originalArrayOfItemsObjectsG.slice();
+  	sortedByPriceFlagG = false;
+  }
+
+	calculatePriceTotal();
+	updateArrayOfRowContainers();
+	displayRowContainers();
 }
 
 function updateArrayOfRowContainers(){
