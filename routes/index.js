@@ -17,10 +17,8 @@ router.get('/createItem', function(req, res, next) {
 router.get('/editItem/:itemId', function(req, res, next) {
   // Obtain the id of the object to display details
   // Get the object to display 
-  console.log('inside editItem route in index.js items id', req.params.itemId);
-  Item.findById(req.params.itemId, function(err, item){
+  Item.findById(req.params.itemId, function(err, item) {
 		if(err) res.status(400).send(err);
-		console.log('inside edit item', item);
 	  res.render('editItem', {itemId:item._id, name:item.name, description:item.description, image:item.image, price:item.price, quantity:item.quantity});
   });
 });
@@ -29,7 +27,6 @@ router.get('/editItem/:itemId', function(req, res, next) {
 router.get('/itemDetails/:itemId', function(req, res, next) {
   // Obtain the id of the object to display details
   // Get the object to display 
-  console.log('items id', req.params.itemId);
   Item.findById(req.params.itemId, function(err, item){
 		if(err) res.status(400).send(err);
 	  res.render('displayItemDetails', {name:item.name, description:item.description, image:item.image, price:item.price, quantity:item.quantity});

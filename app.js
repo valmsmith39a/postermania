@@ -4,17 +4,8 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
-var mongoose = require('mongoose');
-
 
 var mongoose = require('mongoose').connect(process.env.MONGOLAB_URI ||'mongodb://localhost/buyitems'); 
-
-/*
-mongoose.connect('mongodb://localhost/buyitems', function(err){
-  if(err) return console.log('mongo err:', err);
-  console.log('Connected to MongoDB');
-});
-*/
 
 var app = express();
 
@@ -31,7 +22,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', require('./routes/index'));
-app.use('/users', require('./routes/users'));
+//app.use('/users', require('./routes/users'));
 app.use('/transactions', require('./routes/transactions'));
 
 // catch 404 and forward to error handler

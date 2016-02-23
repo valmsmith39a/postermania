@@ -1,16 +1,57 @@
 'use strict'
 
 var mongoose = require('mongoose');
+var Item; 
 
 var itemSchema = new mongoose.Schema({
-	name:{type:String, require:true},
-	description:{type:String, require:true},
-	image:{type:String, require:true},
-	price:{type:Number, require:true},
-	quantity:{type:Number, require:true}
+	name:{type:String},
+	description:{type:String},
+	image:{type:String},
+	price:{type:Number},
+	quantity:{type:Number}
 });
 
-var Item = mongoose.model('Items', itemSchema);
+itemSchema.statics.addItem = function(newItem, callback) {
+  Item.create(newItem, function(err, savedItem) {
+    console.log('new item created: ', savedItem);
+    if(err) return callback(err);
+    callback(null, savedItem);
+  });
+};
+
+itemSchema.statics.getAllItems = function(callback) {
+  Item.find({}, function(err, items) {
+    if(err) return callback(err);
+    callback(null, items);
+  });
+};
+
+itemSchema.statics.delete = function(itemId, callback) {  
+  Item.findById(itemId, function(err, item) {
+    if(err) return callback(err);
+    item.remove(function(err) {
+      if(err) return callback(err);
+      callback(null);
+    });
+  });
+};
+
+itemSchema.statics.update = function(updatedItem, origItemId, callback) {
+  Item.findById(origItemId, function(err, item) {
+    console.log('orig item', item);
+    item.name = updatedItem.name;
+    item.price = updatedItem.price;
+    item.description = updatedItem.description; 
+    item.quantity = updatedItem.quantity;
+    item.save(function(err, savedItem) {
+      console.log('saved item is: ', savedItem);
+      if(err) return callback(err);
+      callback(null, savedItem);
+    });
+  });  
+};
+
+Item = mongoose.model('Items', itemSchema);
 
 module.exports = Item; 
 

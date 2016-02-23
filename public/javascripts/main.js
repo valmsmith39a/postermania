@@ -60,6 +60,8 @@ function editItem(){
 	var itemObject = arrayOfItemsObjectsG[indexOfItem]; 
 	var itemId = itemObject._id;
 
+	console.log('item Id in edit item is: ', itemId);
+
 	location.href = '/editItem/' + itemId;
 }
 
