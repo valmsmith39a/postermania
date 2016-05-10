@@ -1,7 +1,7 @@
 'use strict'
 
 var mongoose = require('mongoose');
-var Item; 
+var Item;
 
 var itemSchema = new mongoose.Schema({
 	name:{type:String},
@@ -25,7 +25,7 @@ itemSchema.statics.getAllItems = function(callback) {
   });
 };
 
-itemSchema.statics.delete = function(itemId, callback) {  
+itemSchema.statics.delete = function(itemId, callback) {
   Item.findById(itemId, function(err, item) {
     if(err) return callback(err);
     item.remove(function(err) {
@@ -39,16 +39,15 @@ itemSchema.statics.update = function(updatedItem, origItemId, callback) {
   Item.findById(origItemId, function(err, item) {
     item.name = updatedItem.name;
     item.price = updatedItem.price;
-    item.description = updatedItem.description; 
+    item.description = updatedItem.description;
     item.quantity = updatedItem.quantity;
     item.save(function(err, savedItem) {
       if(err) return callback(err);
       callback(null, savedItem);
     });
-  });  
+  });
 };
 
 Item = mongoose.model('Items', itemSchema);
 
-module.exports = Item; 
-
+module.exports = Item;
