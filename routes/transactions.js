@@ -6,7 +6,6 @@ var Item = require('../models/item');
 
 /* GET all items in shopping cart */
 router.get('/', function(req, res, next) {
-  console.log('get all items route transactions');
   Item.getAllItems(function(err, items) {
     res.send(items);
   });
@@ -14,15 +13,7 @@ router.get('/', function(req, res, next) {
 
 /* POST add item to shopping cart */
 router.post('/', function(req, res, next) {
-  /*
-  var item = new Item(req.body);
-
-  item.save(function(err, savedItem) {
-    res.send(savedItem);
-  });
-  */
   Item.addItem(req.body, function(err, item) {
-    console.log('item added');
     res.send(item); 
   });
 });

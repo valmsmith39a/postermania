@@ -13,7 +13,6 @@ var itemSchema = new mongoose.Schema({
 
 itemSchema.statics.addItem = function(newItem, callback) {
   Item.create(newItem, function(err, savedItem) {
-    console.log('new item created: ', savedItem);
     if(err) return callback(err);
     callback(null, savedItem);
   });
@@ -38,13 +37,11 @@ itemSchema.statics.delete = function(itemId, callback) {
 
 itemSchema.statics.update = function(updatedItem, origItemId, callback) {
   Item.findById(origItemId, function(err, item) {
-    console.log('orig item', item);
     item.name = updatedItem.name;
     item.price = updatedItem.price;
     item.description = updatedItem.description; 
     item.quantity = updatedItem.quantity;
     item.save(function(err, savedItem) {
-      console.log('saved item is: ', savedItem);
       if(err) return callback(err);
       callback(null, savedItem);
     });
