@@ -1,7 +1,6 @@
 body {
   padding: 50px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
-  /*background-color:#ffffe0;*/
   background-color: white;
 }
 
@@ -47,6 +46,7 @@ img {
 	position:absolute;
 	right: 17%;
 }
+
 /*
 .table-striped > tbody > tr:nth-child(2n+1) {
    background-color: #551111;

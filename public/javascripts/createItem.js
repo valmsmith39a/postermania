@@ -6,27 +6,26 @@ function init(){
 
 function createItemBtn(e){
 	e.preventDefault();
-	console.log('create item button')
+
 	var name = $('#input-name').val();
 	var description = $('#input-description').val();
 	var image = $('#input-image').val();
 	var price = $('#input-price').val();
 	var quantity = $('#input-quantity').val();
-	
+
 	var itemObject={
 				name:name,
 	  		description:description,
-	  		image:image, 
-	  		price:parseFloat(price), 
+	  		image:image,
+	  		price:parseFloat(price),
 	  		quantity:parseFloat(quantity)
 	  	};
 
   $.post('/transactions', itemObject)
 	.success(function(data) {
-		console.log('data:', data)
 		location.href = '/';
   }).fail(function(err) {
 		console.log('err:', err)
     alert('something went wrong :(')
-  });	
+  });
 }
